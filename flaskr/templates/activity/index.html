@@ -1,0 +1,8 @@
+{% for activity in activities %}
+	{{ activity['name'] }}
+	{{ activity['duration'] }}
+	{{ activity['distance'] }}
+	{{ activity['averageHR'] }}
+	{{ activity['calories'] }}
+	<a class="action" href="{{ url_for('activity.update', id=activity['id']) }}">Edit</a>
+{% endfor %}

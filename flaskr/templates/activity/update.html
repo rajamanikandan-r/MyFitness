@@ -1,0 +1,23 @@
+{% block content %}
+  <form method="post">
+    <label for="name">Name</label>
+    <input name="name" id="name"
+      value="{{ request.form['name'] or activity['name'] }}" required>
+    <label for="name">Duration</label>
+    <input name="duration" id="duration"
+      value="{{ request.form['duration'] or activity['duration'] }}" required>
+    <label for="name">Distance</label>
+    <input name="distance" id="distance"
+      value="{{ request.form['distance'] or activity['distance'] }}" required>
+    <label for="name">Calories</label>
+    <input name="calories" id="calories"
+      value="{{ request.form['calories'] or activity['calories'] }}" required>
+    <label for="name">Average HR</label>
+    <input name="averageHR" id="averageHR"
+      value="{{ request.form['averageHR'] or activity['averageHR'] }}" required>
+    <input type="submit" value="Save">
+  </form>
+  <form action="{{ url_for('activity.delete', id=activity['id']) }}" method="post">
+    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+  </form>
+{% endblock %}

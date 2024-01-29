@@ -27,6 +27,9 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    from .import activity
+    app.register_blueprint(activity.bp)
+
     # a simple page that says hello
     @app.route('/hello')
     def hello():
