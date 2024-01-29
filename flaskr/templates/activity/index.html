@@ -1,8 +1,20 @@
+<table>
+<th>
+  <td>Name</td>
+  <td>Duration</td>
+  <td>Distance</td>
+  <td>Average HR</td>
+  <td>Calories</td>
+</th>
+
 {% for activity in activities %}
-	{{ activity['name'] }}
-	{{ activity['duration'] }}
-	{{ activity['distance'] }}
-	{{ activity['averageHR'] }}
-	{{ activity['calories'] }}
-	<a class="action" href="{{ url_for('activity.update', id=activity['id']) }}">Edit</a>
+  <tr>  
+    <td>{{ activity['name'] }}<td>
+    <td>{{ activity['duration'] }}</td>
+    <td>{{ activity['distance'] }}</td>
+    <td>{{ activity['averageHR'] }}</td>
+    <td>{{ activity['calories'] }}</td>
+    <td><a class="action" href="{{ url_for('activity.update', id=activity['id']) }}">Edit</a></td>
+  </tr>
 {% endfor %}
+</table>
