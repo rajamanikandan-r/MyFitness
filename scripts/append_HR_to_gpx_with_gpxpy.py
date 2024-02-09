@@ -17,9 +17,9 @@ for track in gpx.tracks:
       seconds = seconds - (seconds%60)
       print(track_point.time)
       print(seconds)
-      #row = cursor.execute("select HEART_RATE from hybrid_hractivity_sample where TIMESTAMP = ?", (seconds,)).fetchone()
+      row = cursor.execute("select HEART_RATE from hybrid_hractivity_sample where TIMESTAMP = ?", (seconds,)).fetchone()
 		  # Create extension (hr)
-      hr = 123
+      hr = row[0]
       extension = Element("gpxtpx:TrackPointExtension", attrib={"xmlns:gpxtpx": "http://www.garmin.com/xmlschemas/TrackPointExtension/v1"})
       hr_element = SubElement(extension, "gpxtpx:hr")
       hr_element.text = str(hr)
