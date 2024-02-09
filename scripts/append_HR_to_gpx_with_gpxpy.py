@@ -16,7 +16,7 @@ for file in files:
 	for track in gpx.tracks:
 	  for segment in track.segments:
 	    for track_point in segment.points:
-	      seconds = calendar.timegm(track_point.time.timetuple())
+	      seconds = calendar.timegm(track_point.time.timetuple()) - 19800
 	      seconds = seconds - (seconds%60)
 	      row = cursor.execute("select HEART_RATE from hybrid_hractivity_sample where TIMESTAMP = ?", (seconds,)).fetchone()
 	      hr = row[0]
