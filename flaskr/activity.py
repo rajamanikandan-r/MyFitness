@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for, jsonify
 )
 from werkzeug.exceptions import abort
 from flaskr.db import get_db
@@ -14,12 +14,24 @@ def get_activity(id):
     if activity is None:
         abort(404, f"Post id {id} doesn't exist.")
     return activity
-@bp.route('/')
 
+@bp.route('/')
 def index():
     db = get_db()
     activities = db.execute("Select * from activity").fetchall()
     return render_template("activity/index.html", activities = activities)
+
+@bp.route('/create', methods=['POST'])
+def create():
+    activity = request.get_json()
+    db = get_db()
+    db.execute(
+        "INSERT INTO activity (name, type, duration, distance, calories, averageHR) VALUES (?, ?, ?, ?, ?, ?)",
+        ( activity['name'], activity['type'], activity['duration'], activity['distance'], activity['calories'], activity['averageHR'] ),
+    )
+    db.commit()
+    response = {"status": "success", "message": "activity added"}
+    return jsonify(response)
 
 @bp.route('/<int:id>/update', methods=('GET', 'POST'))
 def update(id):
