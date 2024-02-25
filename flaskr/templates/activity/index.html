@@ -18,3 +18,29 @@
   </tr>
 {% endfor %}
 </table>
+
+<table>
+<th>
+<!--   <td>Date</td> -->
+  <td>Steps</td>
+</th>
+
+{% for step in steps %}
+  <tr>
+    <td>{{ step['steps'] }}</td>
+  </tr>
+{% endfor %}
+</table>
+
+<table>
+<th>
+<!--   <td>Date</td> -->
+  <td>Weight</td>
+</th>
+
+{% for weight in weights %}
+  <tr>
+    <td>{{ weight['weight'] }}</td>
+  </tr>
+{% endfor %}
+</table>

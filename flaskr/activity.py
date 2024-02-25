@@ -20,7 +20,10 @@ def get_activity(id):
 def index():
     db = get_db()
     activities = db.execute("Select * from activity").fetchall()
-    return render_template("activity/index.html", activities = activities)
+    steps = db.execute("Select steps from step").fetchall()
+    weights = db.execute("Select weight from weight").fetchall()
+
+    return render_template("activity/index.html", activities = activities, steps = steps, weights = weights)
 
 @bp.route('/create', methods=['POST'])
 def create():
