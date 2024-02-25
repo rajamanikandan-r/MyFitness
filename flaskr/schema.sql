@@ -1,5 +1,6 @@
 DROP TABLE IF EXISTS activity;
-DROP TABLE IF EXISTS step_count;
+DROP TABLE IF EXISTS step;
+DROP TABLE IF EXISTS weight;
 
 CREATE TABLE activity (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -12,10 +13,17 @@ CREATE TABLE activity (
   averagePower INTEGER
 );
 
-CREATE TABLE step_count (
+CREATE TABLE step (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  date_col DATE,
+  date DATE,
   steps INTEGER,
+  week_number INTEGER
+);
+
+CREATE TABLE weight (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  date DATE,
+  weight INTEGER,
   week_number INTEGER
 );
 

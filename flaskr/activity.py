@@ -67,7 +67,7 @@ def delete(id):
     db.commit()
     return redirect(url_for('activity.index'))
 
-@bp.route('/steps', methods=['POST'])
+@bp.route('/step', methods=['POST'])
 def post_steps():
     daily_step = request.get_json()
 
@@ -76,8 +76,23 @@ def post_steps():
     week_number = current_date.strftime('%W')
 
     db = get_db()
-    db.execute( 'INSERT INTO step_count (date_col, steps, week_number) VALUES (?, ?, ?)', (current_date, steps_taken, week_number))
+    db.execute( 'INSERT INTO step (date, steps, week_number) VALUES (?, ?, ?)', (current_date, steps_taken, week_number))
     db.commit()
 
     response = {"status": "success", "message": "steps added"}
+    return jsonify(response)
+
+@bp.route('/weight', methods=['POST'])
+def post_weight():
+    weight_req = request.get_json()
+
+    weight = weight_req['weight']
+    current_date = datetime.strptime(weight_req['date'], '%d-%m-%y')
+    week_number = current_date.strftime('%W')
+
+    db = get_db()
+    db.execute( 'INSERT INTO weight (date, weight, week_number) VALUES (?, ?, ?)', (current_date, weight, week_number))
+    db.commit()
+
+    response = {"status": "success", "message": "weight added"}
     return jsonify(response)
