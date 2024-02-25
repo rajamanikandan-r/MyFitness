@@ -4,6 +4,7 @@ from flask import (
 from werkzeug.exceptions import abort
 from flaskr.db import get_db
 bp = Blueprint('activity', __name__)
+from datetime import datetime
 
 def get_activity(id):
     activity = get_db().execute(
@@ -65,3 +66,18 @@ def delete(id):
     db.execute('Delete from activity where id = ?', (id,))
     db.commit()
     return redirect(url_for('activity.index'))
+
+@bp.route('/steps', methods=['POST'])
+def post_steps():
+    daily_step = request.get_json()
+
+    steps_taken = daily_step['count']
+    current_date = datetime.strptime(daily_step['date'], '%d-%m-%y')
+    week_number = current_date.strftime('%W')
+
+    db = get_db()
+    db.execute( 'INSERT INTO step_count (date_col, steps, week_number) VALUES (?, ?, ?)', (current_date, steps_taken, week_number))
+    db.commit()
+
+    response = {"status": "success", "message": "steps added"}
+    return jsonify(response)
