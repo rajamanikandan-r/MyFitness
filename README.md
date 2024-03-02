@@ -1,4 +1,4 @@
-Testing if authentication with github through token works
+Testing if heroku deploy works
 
 Setting up
 
